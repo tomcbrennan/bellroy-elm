@@ -9,14 +9,4 @@
     var searchApp = Elm.Search.init({
         node: document.getElementById('search')
     });
-
-    document.addEventListener('toggle-search', function(event) {
-        if (event.detail.isOpen) {
-            setTimeout(() => {
-                document.querySelector('.search-input')?.focus();
-            }, 50);
-        } else {
-            searchApp.ports.onCloseSearch.send(null);
-        }
-    });
 </script>
