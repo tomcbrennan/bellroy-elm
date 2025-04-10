@@ -1,0 +1,85 @@
+.site-header {
+	@apply fixed top-0 left-0 w-full h-14 lg:h-[105px] bg-white flex items-center z-[99];
+
+	.header-container {
+		@apply h-full flex items-center justify-between gap-10 w-full;
+
+		.desktop-navigation {
+			@apply flex items-center h-full pt-8 max-lg:hidden;
+
+			.menu-item {
+				@apply flex items-center justify-center h-full;
+
+				.menu-link {
+					@apply px-5 flex flex-col gap-0.5 items-center justify-center h-full;
+
+					> div {
+						@apply text-[#333333];
+					}
+				}
+			}
+		}
+
+		.mobile-menu {
+			@apply lg:hidden overflow-y-scroll fixed top-14 left-0 w-full h-full bg-[#F7F7F7] z-20 opacity-0 pointer-events-none duration-300 ease-in-out;
+
+            .mobile-navigation {
+                @apply flex flex-col divide-y divide-white;
+
+                .menu-item {
+                    @apply px-6 py-4;
+
+                    .menu-link {
+                        @apply text-base text-[#333333];
+                    }
+                }
+            }
+		}
+
+		.menu-icon {
+			@apply h-6 lg:h-7 w-auto fill-none stroke-[#999] duration-100 group-hover:!stroke-[#333333];
+			stroke-linecap: round;
+			stroke-miterlimit: 10;
+			stroke-width: 2.5px;
+		}
+	}
+}
+
+.search-overlay {
+	@apply fixed duration-500 ease-in-out top-14 lg:top-[105px] left-0 w-full bg-[#EFEFEF] z-40 h-14 lg:h-[105px] flex items-center -translate-y-40;
+
+	.close-search {
+		@apply absolute top-full right-8 bg-[#e15a1d] py-2 px-4 cursor-pointer rounded-b-sm text-white text-xs duration-100 hover:brightness-90;
+	}
+
+	.search-card {
+		@apply p-4 bg-[#F7F7F7] flex flex-col gap-4 text-sm cursor-pointer duration-150 hover:brightness-95;
+	}
+}
+
+body {
+	&.mobile-menu-active {
+		.mobile-menu {
+			@apply !opacity-100 !pointer-events-auto;
+		}
+
+        [data-toggle-mobile-menu].open-menu {
+            @apply translate-y-40 delay-0;
+        }
+        [data-toggle-mobile-menu].close-menu {
+            @apply translate-y-0 delay-150;
+        }
+	}
+
+	&.search-active {
+		.search-overlay {
+			@apply translate-y-0;
+		}
+
+		[data-toggle-search] {
+			.menu-icon {
+				@apply stroke-[#333];
+			}
+		}
+	}
+}

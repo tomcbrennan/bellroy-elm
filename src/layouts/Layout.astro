@@ -1,0 +1,23 @@
+---
+import '../styles/global.css'
+import Header from '../components/Header.astro'
+import MobileToggles from '../components/MobileToggles.astro'
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Bellroy | Tom Brennan</title>
+		<script src="src/elm/build/Search.js" is:inline></script>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<slot />
+		</main>
+		<MobileToggles />
+	</body>
+</html>

@@ -1,0 +1,18 @@
+@font-face {
+	font-family: 'GTUltra';
+	src: url('../assets/fonts/GTUltra-Regular.otf') format('opentype');
+	font-weight: 400;
+	font-style: normal;
+}
+
+body {
+    font-family: 'GTUltra', sans-serif;
+}
+
+.is-h2 {
+    @apply text-xl lg:text-3xl font-normal leading-9;
+}
+
+.block-content {
+	@apply flex flex-col gap-6 md:gap-8;
+}

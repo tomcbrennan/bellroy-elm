@@ -1,0 +1,65 @@
+---
+import chevron from '../assets/media/chevron-down.svg'
+
+const links = [
+	{ title: 'Featured', href: '#' },
+	{ title: 'Bags', href: '#' },
+	{ title: 'Wallets', href: '#' },
+	{ title: 'Accessories', href: '#' },
+	{ title: 'Tech', href: '#' },
+	{ title: 'Travel', href: '#' },
+	{ title: 'About Us', href: '#' },
+]
+---
+
+<ul class="desktop-navigation">
+	{
+		links.map((link) => (
+			<li class="menu-item">
+				<a href={link.href} class="menu-link group">
+					<div>{link.title}</div>
+					<img
+						src={chevron.src}
+						class="opacity-30 duration-100 group-hover:opacity-100"
+						width="12"
+						height="12"
+						alt="Dropdown"
+					/>
+				</a>
+			</li>
+		))
+	}
+</ul>
+
+<div class="mobile-menu">
+	<ul class="mobile-navigation">
+		{
+			links.map((link) => (
+				<li class="menu-item">
+					<a href={link.href} class="menu-link group">
+						{link.title}
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</div>
+
+<script>
+	function initMobileMenu() {
+		const mobileMenu = document.querySelector('.mobile-menu')
+		const mobileMenuToggles = document.querySelectorAll(
+			'[data-toggle-mobile-menu]'
+		)
+
+		if (!mobileMenu) return
+
+		mobileMenuToggles.forEach((toggle) => {
+			toggle.addEventListener('click', () => {
+				document.body.classList.toggle('mobile-menu-active')
+			})
+		})
+	}
+
+	document.addEventListener('DOMContentLoaded', initMobileMenu)
+</script>

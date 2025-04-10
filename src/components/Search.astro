@@ -1,0 +1,82 @@
+---
+import SearchCard from './SearchCard.astro'
+
+// const response = await fetch('https://dummyjson.com/products?limit=10')
+// const data = await response.json()
+// const products = data.products || []
+---
+
+<div data-search-overlay class="search-overlay">
+	<!-- <div class="container flex items-center h-full">
+		<form class="flex items-center w-full h-full">
+			<label class="search-input-wrapper w-full h-full flex items-center gap-4">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 31 27"
+					height="28"
+					fill="none"
+					stroke-width="2.5"
+					stroke="#999"
+					stroke-linecap="round"
+					class="duration-100 group-hover:!stroke-[#333333]">
+					<circle cx="13.7" cy="11.1" r="9"></circle>
+					<path d="M20.1 17.5l6.8 6.8"></path>
+				</svg>
+				<input
+					type="text"
+					placeholder="What are you looking for?"
+					class="search-input text-lg lg:text-3xl text-[#333] w-full h-full outline-none"
+				/>
+			</label>
+		</form>
+	</div> -->
+
+	<div id="search"></div>
+	<!-- <div
+	class="results-modal overflow-y-scroll pb-40 lg:pb-14 absolute left-0 top-full bg-white w-full h-auto invisible max-h-[calc(100vh-56px-56px)] lg:max-h-[calc(100vh-105px-105px)]">
+		<div class="container py-6 lg:py-12">
+			<div class="block-content">
+				<span class="is-h2">Are you looking for one of these?</span>
+				<div
+					class="grid grid-flow-dense gap-1 initial:py-1 grid-cols-2 sm:grid-cols-[repeat(auto-fill,minmax(250px,1fr))] initial:sm:px-1 lg:grid-cols-[repeat(auto-fill,minmax(285px,1fr))] supports-[container-type]:sm:grid-cols-2 supports-[container-type]:sm:@[640px]:grid-cols-[repeat(auto-fill,minmax(250px,1fr))] supports-[container-type]:lg:@[1024px]:grid-cols-[repeat(auto-fill,minmax(285px,1fr))]">
+					{products.map((product) => <SearchCard product={product} />)}
+				</div>
+				<div class="flex items-center justify-center w-full">
+					<a href="#" class="underline text-sm">View all products</a>
+				</div>
+			</div>
+		</div>
+	</div> -->
+	<div data-toggle-search class="close-search max-lg:hidden">
+		Close (or press ESC)
+	</div>
+</div>
+
+<script>
+	// import { gsap } from 'gsap'
+
+	// function initSearchResults() {
+	// 	const searchInput = document.querySelector('.search-input')
+	// 	const resultsModal = document.querySelector('.results-modal')
+
+	// 	if (!searchInput || !resultsModal) return
+
+	// 	searchInput.addEventListener('input', (e) => {
+	// 		if (e.target.value.length > 0) {
+	// 			setTimeout(() => {
+	// 				document.body.style.overflow = 'hidden'
+	// 				// gsap.to(resultsModal, {
+	// 				// 	duration: 0.2,
+	// 				// 	ease: 'power2.out',
+	// 				// 	autoAlpha: 1,
+	// 				// 	delay: 0.2,
+	// 				// })
+	// 			}, 200)
+	// 		}
+	// 	})
+	// }
+	// document.addEventListener('DOMContentLoaded', initSearchResults)
+	var search = Elm.Search.init({
+		node: document.getElementById('search'),
+	})
+</script>
