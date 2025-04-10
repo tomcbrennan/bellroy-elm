@@ -4370,7 +4370,6 @@ function _Browser_load(url)
 		}
 	}));
 }
-var $author$project$Search$init = {content: ''};
 var $elm$core$Basics$EQ = {$: 'EQ'};
 var $elm$core$Basics$GT = {$: 'GT'};
 var $elm$core$Basics$LT = {$: 'LT'};
@@ -5159,34 +5158,60 @@ var $elm$core$Task$perform = F2(
 			$elm$core$Task$Perform(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
+var $elm$browser$Browser$element = _Browser_element;
+var $author$project$Search$Product = F3(
+	function (name, description, category) {
+		return {category: category, description: description, name: name};
+	});
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
-var $elm$core$Platform$Sub$batch = _Platform_batch;
-var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
-var $elm$browser$Browser$sandbox = function (impl) {
-	return _Browser_element(
+var $author$project$Search$init = function (_v0) {
+	return _Utils_Tuple2(
 		{
-			init: function (_v0) {
-				return _Utils_Tuple2(impl.init, $elm$core$Platform$Cmd$none);
-			},
-			subscriptions: function (_v1) {
-				return $elm$core$Platform$Sub$none;
-			},
-			update: F2(
-				function (msg, model) {
-					return _Utils_Tuple2(
-						A2(impl.update, msg, model),
-						$elm$core$Platform$Cmd$none);
-				}),
-			view: impl.view
+			content: '',
+			products: _List_fromArray(
+				[
+					A3($author$project$Search$Product, 'All Conditions Backpack', 'Durable and weather-resistant backpack for everyday use', 'Bags'),
+					A3($author$project$Search$Product, 'Slim Wallet', 'Minimalist wallet designed to hold all your essentials in a slim form', 'Wallets'),
+					A3($author$project$Search$Product, 'Tech Kit', 'Organising kit to keep your tech essentials neatly stored', 'Accessories'),
+					A3($author$project$Search$Product, 'Laptop Sleeve', 'Sleek sleeve designed to protect your laptop without the bulk', 'Laptop Accessories'),
+					A3($author$project$Search$Product, 'Phone Case', 'Slim, protective case for your smartphone with a minimalist design', 'Phone Accessories'),
+					A3($author$project$Search$Product, 'Travel Wallet', 'Premium wallet designed to keep your travel essentials organised', 'Travel Accessories'),
+					A3($author$project$Search$Product, 'Sling', 'Compact and convenient bag designed for easy access and comfort', 'Bags'),
+					A3($author$project$Search$Product, 'Key Cover', 'Stylish and functional key cover to protect your keys and keep them organised', 'Accessories'),
+					A3($author$project$Search$Product, 'Classic Backpack', 'Timeless and functional backpack with thoughtful storage options', 'Bags'),
+					A3($author$project$Search$Product, 'Hide & Seek Wallet', 'Classic wallet with premium leather and smart compartments for your cards and cash', 'Wallets')
+				])
+		},
+		$elm$core$Platform$Cmd$none);
+};
+var $author$project$Search$CloseSearch = {$: 'CloseSearch'};
+var $elm$json$Json$Decode$null = _Json_decodeNull;
+var $author$project$Search$onCloseSearch = _Platform_incomingPort(
+	'onCloseSearch',
+	$elm$json$Json$Decode$null(_Utils_Tuple0));
+var $author$project$Search$subscriptions = function (_v0) {
+	return $author$project$Search$onCloseSearch(
+		function (_v1) {
+			return $author$project$Search$CloseSearch;
 		});
 };
 var $author$project$Search$update = F2(
 	function (msg, model) {
-		var newContent = msg.a;
-		return _Utils_update(
-			model,
-			{content: newContent});
+		if (msg.$ === 'Change') {
+			var newContent = msg.a;
+			return _Utils_Tuple2(
+				_Utils_update(
+					model,
+					{content: newContent}),
+				$elm$core$Platform$Cmd$none);
+		} else {
+			return _Utils_Tuple2(
+				_Utils_update(
+					model,
+					{content: ''}),
+				$elm$core$Platform$Cmd$none);
+		}
 	});
 var $author$project$Search$Change = function (a) {
 	return {$: 'Change', a: a};
@@ -5204,6 +5229,7 @@ var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$form = _VirtualDom_node('form');
 var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$html$Html$label = _VirtualDom_node('label');
+var $elm$core$Basics$neq = _Utils_notEqual;
 var $elm$html$Html$Events$alwaysStop = function (x) {
 	return _Utils_Tuple2(x, true);
 };
@@ -5239,14 +5265,166 @@ var $elm$html$Html$Events$onInput = function (tagger) {
 			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
 };
 var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
+var $elm$html$Html$a = _VirtualDom_node('a');
+var $elm$core$List$filter = F2(
+	function (isGood, list) {
+		return A3(
+			$elm$core$List$foldr,
+			F2(
+				function (x, xs) {
+					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
+				}),
+			_List_Nil,
+			list);
+	});
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
+var $elm$html$Html$span = _VirtualDom_node('span');
+var $elm$core$String$toLower = _String_toLower;
+var $author$project$Search$viewProductCard = function (product) {
+	return A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('search-card p-4 rounded m-1')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('search-card-content')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('text-lg font-bold')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text(product.name)
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('text-sm text-gray-600')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text(product.description)
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('text-xs text-gray-500 mt-2')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text(product.category)
+							]))
+					]))
+			]));
+};
+var $author$project$Search$viewResultsModal = function (model) {
+	var lowercaseQuery = $elm$core$String$toLower(model.content);
+	var matchesQuery = function (product) {
+		return A2(
+			$elm$core$String$contains,
+			lowercaseQuery,
+			$elm$core$String$toLower(product.name)) || (A2(
+			$elm$core$String$contains,
+			lowercaseQuery,
+			$elm$core$String$toLower(product.description)) || A2(
+			$elm$core$String$contains,
+			lowercaseQuery,
+			$elm$core$String$toLower(product.category)));
+	};
+	var filteredProducts = A2($elm$core$List$filter, matchesQuery, model.products);
+	return A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('results-modal overflow-y-scroll pb-40 lg:pb-14 absolute left-0 top-full bg-white w-full h-auto max-h-[calc(100vh-56px-56px)] lg:max-h-[calc(100vh-105px-105px)]')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('container py-6 lg:py-12')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('block-content')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$span,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('is-h2')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Are you looking for one of these?')
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('grid grid-flow-dense gap-1 initial:py-1 grid-cols-2 sm:grid-cols-[repeat(auto-fill,minmax(250px,1fr))] initial:sm:px-1 lg:grid-cols-[repeat(auto-fill,minmax(285px,1fr))] supports-[container-type]:sm:grid-cols-2 supports-[container-type]:sm:@[640px]:grid-cols-[repeat(auto-fill,minmax(250px,1fr))] supports-[container-type]:lg:@[1024px]:grid-cols-[repeat(auto-fill,minmax(285px,1fr))]')
+									]),
+								A2($elm$core$List$map, $author$project$Search$viewProductCard, filteredProducts)),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('flex items-center justify-center w-full')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$a,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$href('#'),
+												$elm$html$Html$Attributes$class('underline text-sm')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('View all products')
+											]))
+									]))
+							]))
+					]))
+			]));
+};
 var $author$project$Search$view = function (model) {
 	return A2(
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('container flex items-center h-full')
+				$elm$html$Html$Attributes$class('container flex items-center w-full h-full')
 			]),
 		_List_fromArray(
 			[
@@ -5278,10 +5456,11 @@ var $author$project$Search$view = function (model) {
 									]),
 								_List_Nil)
 							]))
-					]))
+					])),
+				(model.content !== '') ? $author$project$Search$viewResultsModal(model) : $elm$html$Html$text('')
 			]));
 };
-var $author$project$Search$main = $elm$browser$Browser$sandbox(
-	{init: $author$project$Search$init, update: $author$project$Search$update, view: $author$project$Search$view});
+var $author$project$Search$main = $elm$browser$Browser$element(
+	{init: $author$project$Search$init, subscriptions: $author$project$Search$subscriptions, update: $author$project$Search$update, view: $author$project$Search$view});
 _Platform_export({'Search':{'init':$author$project$Search$main(
 	$elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}});}(this));

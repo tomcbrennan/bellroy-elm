@@ -51,63 +51,67 @@ import Search from './Search.astro'
 <Search />
 
 <script>
-	import { gsap } from 'gsap'
+  function initSearchToggle() {
+      const toggleSearchBtns = document.querySelectorAll('[data-toggle-search]')
+      const resultsModal = document.querySelector('.results-modal')
+      const mainElement = document.querySelector('main')
+      const searchInput = document.querySelector('.search-input')
 
-	function initSearchToggle() {
-		const toggleSearchBtns = document.querySelectorAll('[data-toggle-search]')
-		const searchContainer = document.querySelector('[data-search-overlay]')
-		const resultsModal = document.querySelector('.results-modal')
-		const mainElement = document.querySelector('main')
+      if (!toggleSearchBtns) return
 
-		if (!toggleSearchBtns) return
+      const removeResults = () => {
+          if (searchInput) {
+              searchInput.value = ''
+              const inputEvent = new Event('input', { bubbles: true })
+              searchInput.dispatchEvent(inputEvent)
+          }
+      }
 
-		const removeResults = () => {
-			gsap.to(resultsModal, {
-				duration: 0,
-				autoAlpha: 0,
-			})
+      const handleEscape = (e) => {
+          if (e.key === 'Escape') {
+              document.body.classList.remove('search-active')
+              removeResults()
+              removeListeners()
+              document.body.style.overflowY = 'visible'
+          }
+      }
 
-			setTimeout(() => {
-				searchContainer.querySelector('input').value = ''
-			}, 200)
-		}
+      const handleMainClick = () => {
+          document.body.classList.remove('search-active')
+          removeResults()
+          removeListeners()
+          document.body.style.overflowY = 'visible'
+      }
 
-		const handleEscape = (e) => {
-			if (e.key === 'Escape') {
-				document.body.classList.remove('search-active')
-				removeResults()
-				removeListeners()
-				document.body.style.overflowY = 'visible'
-			}
-		}
+      const removeListeners = () => {
+          document.removeEventListener('keydown', handleEscape)
+          mainElement?.removeEventListener('click', handleMainClick)
+      }
 
-		const handleMainClick = () => {
-			document.body.classList.remove('search-active')
-			removeResults()
-			removeListeners()
-			document.body.style.overflowY = 'visible'
-		}
+      toggleSearchBtns.forEach((toggle) => {
+          toggle.addEventListener('click', () => {
+              const isOpen = document.body.classList.toggle('search-active')
 
-		const removeListeners = () => {
-			document.removeEventListener('keydown', handleEscape)
-			mainElement.removeEventListener('click', handleMainClick)
-		}
+              if (isOpen) {
+                  setTimeout(() => {
+                      searchInput?.focus()
+                  }, 50)
 
-		toggleSearchBtns.forEach((toggle) => {
-			toggle.addEventListener('click', () => {
-				const isOpen = document.body.classList.toggle('search-active')
+                  document.addEventListener('keydown', handleEscape)
+                  mainElement?.addEventListener('click', handleMainClick)
+                  document.body.style.overflowY = 'hidden'
+              } else {
+                  removeResults()
+                  removeListeners()
+                  document.body.style.overflowY = 'visible'
+              }
+          })
+      })
+  }
 
-				if (isOpen) {
-					searchContainer.querySelector('input')?.focus()
-					document.addEventListener('keydown', handleEscape)
-					mainElement.addEventListener('click', handleMainClick)
-				} else {
-					removeResults()
-					document.body.style.overflow = 'visible'
-				}
-			})
-		})
-	}
-
-	document.addEventListener('DOMContentLoaded', initSearchToggle)
+  document.addEventListener('DOMContentLoaded', () => {
+      if (document.querySelector('[data-toggle-search]')) {
+          initSearchToggle()
+      }
+  })
 </script>
